@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js ">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js">
+  </script>
+  <meta charset="utf-8">
+  <title>Belt </title>
+</head>
+
+<body>
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</p>
+      {% endfor %}
+  </ul>{% csrf_token %} {% endif %}
+  <p> {{user.username}}</p>
+  <div id="container" class="navbar navbar-default">
+    <h3>Destination: {{trip.destination}}</p>
+    <p> Planned By: {{trip.new_trip.name}}</p>
+    <p>Travel date from: {{trip.travel_date_from}} </p>
+    <p>Travel date to: {{trip.travel_date_to}} </p>
+  </div>
+  <div id="other" class="navbar navbar-default">
+    <h3>Other Users' joining the trip:
+      {{trip.destination}}</p>
+  </div>
+
+  <div id="footer">
+
+    <a href="{% url 'main'%}">Back</a>
+  </div>
+</body>
+
+
+
+</html>

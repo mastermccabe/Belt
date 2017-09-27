@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js ">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js">
+  </script>
+  <meta charset="utf-8">
+  <title>Belt </title>
+</head>
+
+<body>
+
+  <div id="wrapper" class="container-fluid mx-auto mt-4 row">
+
+    <div id="register" class="text-left col border navbar-brand  mt-4 rounded">
+      <h2> Welcome! {{user.username}}</h2>
+
+      <form action='register' method='post'>{% csrf_token %}
+        <div class="form-group col"> Name:
+          <input required type="text" name="name" value="{{users.name}}"><br> Username: <input required type="text" name="username" value="{{users.username}}">
+
+          <br>Password: <input required type="password" name="password">
+          <br> Confirm pw: <input required type="password" name="conf_password"><br>
+          <input type='submit' class="btn-primary" value='Register' />
+        </div>
+      </form>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</p>
+          {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+
+    <div id="login" class="border rounded  mt-4 navbar-brand text-left col">
+      <form action='login' method='post'>{% csrf_token %}
+        <div class="form-group col">
+          <h4> Login </h4>
+          <br> Username: <input required type="text" name="username" value="{{users.username}}">
+          <br>Password: <input required type="password" name="password"><br>
+          <input type='submit' class="btn-primary" value='Login' />
+        </div>
+      </form>
+    </div>
+    <div id="footer" class="row"> <a href="{% url 'logout' %}">Log Out </a><br>
+      <a href="{% url 'travels' %}">Home</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

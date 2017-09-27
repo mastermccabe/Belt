@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js ">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js">
+  </script>
+  <meta charset="utf-8">
+  <title>Belt </title>
+</head>
+
+<body>
+  <div id="travels" class="container-fluid form-group">
+    <div id="top bar" class="container row">
+      <h2 class="text-left col"> Add a trip</h2>
+      <div id="header" class="text-right col"> <a href="{% url 'logout' %}">Log Out </a><br>
+      </div>
+      <div id="add_travel" class="col-md-12">
+        <form action='/travels/add_travel' method='post'>{% csrf_token %} Destination: <input required type="text" name="destination">
+          <br><label for="description">Description:</label>
+          <textarea required class="form-control col-md-5" rows="5" name="description" id="description"></textarea> Departure Date:
+          <input required type="date" name="travel_date_from" min="2017-09-27"><br> Travel Date To:
+          <input required type="date" name="travel_date_to" min="2017-09-28"><br>
+          <input type='submit' class="btn-primary " value='Add' /> </form>
+      </div>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</p>
+          {% endfor %}
+      </ul>
+      {% endif %}
+
+      <table class="table table-hover container-fluid border">
+        <thead>
+          <tr>
+            <br><br><br> <br><br><br>
+
+            <h3>Reminder of Your upcomming Trip Schedules</h3>
+            <th>Trip ID:</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr> {% for u in your_trips %}
+            <td scope="row">{{u.id}}</td>
+            <td><a href="/desination/{{u.id}}">{{u.destination}}</td>
+          <td>{{u.travel_date_from}}</td>
+          <td>{{u.travel_date_to}}</td>
+
+
+        </tr>
+  {%endfor%} {% csrf_token %}
+
+        </tbody>
+<hr>
+    </div>
+<div id = "footer" class="navbar navbar-default navbar-fixed-bottom">
+  <h5>  <a href="{% url 'travels'%}">Back to travels</h5>
+</div>
+
+</body>
+
+
+
+</html>
